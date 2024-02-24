@@ -1,1 +1,170 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text-align-center{
+    text-align: center;
+}
+.p-1{
+    padding: 10px;
+}
+.d-flex {
+    display: flex;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.w-1 {
+    width: 10%;
+}
+
+.w-2 {
+    width: 20%;
+}
+
+.w-3 {
+    width: 30%;
+}
+
+.w-4 {
+    width: 40%;
+}
+
+.w-5 {
+    width: 50%;
+}
+
+.w-6 {
+    width: 60%;
+}
+
+.w-7 {
+    width: 70%;
+}
+
+.w-8 {
+    width: 80%;
+}
+
+.w-9 {
+    width: 90%;
+}
+
+.w-10 {
+    width: 100%;
+}
+
+.h-1 {
+    height: 10%;
+}
+
+.h-2 {
+    height: 20%;
+}
+
+.h-3 {
+    height: 30%;
+}
+
+.h-4 {
+    height: 40%;
+}
+
+.h-5 {
+    height: 50%;
+}
+
+.h-6 {
+    height: 60%;
+}
+
+.h-7 {
+    height: 70%;
+}
+
+.h-8 {
+    height: 80%;
+}
+
+.h-9 {
+    height: 90%;
+}
+
+.h-10 {
+    height: 100%;
+}
+.example-card{
+    max-width: 550px;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.home-card{
+    background: linear-gradient(to right bottom,rgb(10, 3, 15),rgb(53, 10, 88), rgba(0, 0, 0, 0.979) );
+    color: #fff;
+    .logo-container{
+        margin-top: 24px;
+    }
+    .main-header{
+        font-size: 36px;
+        line-height: 48px;
+        letter-spacing: 2px;
+        padding:  16px 0;
+    }
+    .footer{
+        padding-top: 10px;
+        .sign-btn{
+            width: 100%;
+            background-color: #fff;
+        }
+        .login-btn{
+            text-align: center;
+            & span{
+                color:rgb(122, 118, 126);
+            }
+        }
+    }
+
+}
+.btn-full-green{
+        width: 100%;
+        background-color: rgb(36,120,109) !important;
+        color: #fff !important;
+}
+.login-card{
+    .forgot-btn{
+        text-align: center;
+        color: rgb(36,120,109);
+        cursor: pointer;
+    }
+}
