@@ -10,12 +10,14 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.text-align-center{
+.text-align-center {
     text-align: center;
 }
-.p-1{
+
+.p-1 {
     padding: 10px;
 }
+
 .d-flex {
     display: flex;
 }
@@ -28,8 +30,26 @@ body {
     align-items: center;
 }
 
+.align-items-end {
+    align-items: flex-end;
+}
 .justify-content-center {
     justify-content: center;
+}
+
+.justify-content-start {
+    justify-content: flex-start;
+}
+
+.gap-1 {
+    gap: 6px;
+}
+.gap-2{
+    gap: 12px;
+}
+
+.justify-content-between {
+    justify-content: space-between;
 }
 
 .flex-column {
@@ -119,7 +139,32 @@ body {
 .h-10 {
     height: 100%;
 }
-.example-card{
+
+.me-1 {
+    margin-right: 8px;
+}
+
+.mt-1 {
+    margin-top: 8px;
+}
+
+.mt-2 {
+    margin-top: 16px;
+}
+
+.mb-1 {
+    margin-bottom: 8px;
+}
+
+.ms-1 {
+    margin-left: 8px;
+}
+
+.me-1 {
+    marker-end: 8px;
+}
+
+.example-card {
     max-width: 550px;
     text-align: center;
     margin: auto;
@@ -129,42 +174,168 @@ body {
     padding: 24px;
 }
 
-.home-card{
-    background: linear-gradient(to right bottom,rgb(10, 3, 15),rgb(53, 10, 88), rgba(0, 0, 0, 0.979) );
+.home-card {
+    background: linear-gradient(to right bottom, rgb(10, 3, 15), rgb(53, 10, 88), rgba(0, 0, 0, 0.979));
     color: #fff;
-    .logo-container{
+
+    .logo-container {
         margin-top: 24px;
     }
-    .main-header{
+
+    .main-header {
         font-size: 36px;
         line-height: 48px;
         letter-spacing: 2px;
-        padding:  16px 0;
+        padding: 16px 0;
     }
-    .footer{
+
+    .footer {
         padding-top: 10px;
-        .sign-btn{
+
+        .sign-btn {
             width: 100%;
             background-color: #fff;
         }
-        .login-btn{
+
+        .login-btn {
             text-align: center;
-            & span{
-                color:rgb(122, 118, 126);
+
+            & span {
+                color: rgb(122, 118, 126);
             }
         }
     }
 
 }
-.btn-full-green{
-        width: 100%;
-        background-color: rgb(36,120,109) !important;
-        color: #fff !important;
+
+.btn-full-green {
+    width: 100%;
+    background-color: rgb(36, 120, 109) !important;
+    color: #fff !important;
 }
-.login-card{
-    .forgot-btn{
+
+.login-card {
+    .forgot-btn {
         text-align: center;
-        color: rgb(36,120,109);
+        color: rgb(36, 120, 109);
         cursor: pointer;
     }
+}
+
+.main-card {
+    padding: 12px 0px 0px 0px ;
+    max-width: 550px;
+    text-align: center;
+    margin: auto;
+    background: #111 !important;
+
+    & mat-toolbar {
+        background: transparent !important;
+        color: #fff;
+    }
+
+    & mat-card-content {
+        height: calc(100vh - 64px);
+        overflow: hidden;
+        color: #fff;
+        padding: 0 !important;
+
+        & .stories {
+            width: 100%;
+            overflow-x: auto;
+            padding: 12px;
+            &-box {
+                min-width: 74px;
+                gap: 4px;
+
+                &-img {
+                    border: 3px solid rgba(212, 141, 35, 0.936);
+                    border-radius: 50%;
+                    height: 62px;
+                    width: 62px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                & p {
+                    margin: 0;
+                }
+            }
+        }
+
+        & .inner-card {
+            width: 100% !important;
+            background: #fff;
+            height: calc(100% - 131px);
+
+            & mat-list {
+                overflow: auto;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 8px;
+                height: calc(100% - 52px);
+                & mat-list-item{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    height: auto;
+                    min-height: 72px;
+                    & .profile-text{
+                        & p-avatar{
+                            height: 32px;
+                        }
+                        & p{
+                            margin: 0 !important;
+                        }
+                    }
+                    & .mess-number{
+                        & .mdc-fab--mini{
+                            height: 28px !important;
+                            width: 28px !important;
+                        }
+                        & .mat-mdc-mini-fab{
+                            box-shadow :none;
+                        }
+                        & p{
+                            margin: 0 !important;
+                            color: #777;
+                        }
+                    }
+                }
+            }
+
+            & mat-toolbar {
+                color: rgb(36,120,109);
+                & div{
+                    padding: 8px;
+                    cursor: pointer;
+                }
+                & p{
+                    margin: 0 !important;
+                }
+                // & mat-icon{
+                // }
+            }
+        }
+    }
+
+}
+
+.divider-white {
+    background-color: #fff;
+    margin-top: 24px !important;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
 }
