@@ -1,0 +1,51 @@
+<mat-card class="example-card chat-card h-10">
+    <mat-toolbar class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-start">
+            <mat-icon class="me-1">keyboard_backspace</mat-icon>
+            <div style="height: 32px;" class="ms-1 me-1">
+                <p-avatar image="../../assets/avatars/dhruv_avatar.jpg" styleClass="mr-2" size="xlarge"
+                    shape="circle"></p-avatar>
+            </div>
+            <h2>Simple Chat</h2>
+        </div>
+        <div>
+            <mat-icon class="me-1"> call</mat-icon>
+            <mat-icon>videocam</mat-icon>
+        </div>
+    </mat-toolbar>
+    <mat-card-content class="mt-2">
+        <mat-list role="list">
+            @for(message of messageArr;track message?.type){
+            <mat-list-item role="listitem" [class]="message?.type == 'me' ? 'end' : 'start'">
+                <mat-chip-listbox aria-label="Fish selection">
+                    <mat-chip-option>{{message?.message}}</mat-chip-option>
+                </mat-chip-listbox>
+            </mat-list-item>
+            }
+        </mat-list>
+    </mat-card-content>
+    {{inputValue}}
+    <mat-toolbar class="footer d-flex align-items-center justify-content-between">
+        <mat-icon> insert_link</mat-icon>
+        <div class="input-box">
+            <input type="text" [(ngModel)]="inputValue" placeholder="Enter your message">
+            <mat-icon>file_copy</mat-icon>
+
+        </div>
+        @if(inputValue.length > 0){
+        <div class="d-flex justify-content-center align-items-center">
+            <mat-chip-listbox aria-label="Fish selection">
+                <mat-chip-option><mat-icon>send</mat-icon></mat-chip-option>
+            </mat-chip-listbox>
+            
+        </div>
+        }
+        @if(inputValue.length < 1){
+        <div class="d-flex justify-content-center align-items-center">
+            <mat-icon>photo_camera</mat-icon>
+            <mat-icon>keyboard_voice</mat-icon>
+        </div>
+        }
+
+    </mat-toolbar>
+</mat-card>

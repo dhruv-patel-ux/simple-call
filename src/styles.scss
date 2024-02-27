@@ -44,12 +44,16 @@ body {
 .gap-1 {
     gap: 6px;
 }
-.gap-2{
+
+.gap-2 {
     gap: 12px;
 }
 
 .justify-content-between {
     justify-content: space-between;
+}
+.justify-content-end {
+    justify-content: flex-end !important;
 }
 
 .flex-column {
@@ -223,7 +227,7 @@ body {
 }
 
 .main-card {
-    padding: 12px 0px 0px 0px ;
+    padding: 12px 0px 0px 0px;
     max-width: 550px;
     text-align: center;
     margin: auto;
@@ -244,6 +248,7 @@ body {
             width: 100%;
             overflow-x: auto;
             padding: 12px;
+
             &-box {
                 min-width: 74px;
                 gap: 4px;
@@ -276,30 +281,36 @@ body {
                 align-items: center;
                 gap: 8px;
                 height: calc(100% - 52px);
-                & mat-list-item{
+
+                & mat-list-item {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     flex-direction: row;
                     height: auto;
                     min-height: 72px;
-                    & .profile-text{
-                        & p-avatar{
+
+                    & .profile-text {
+                        & p-avatar {
                             height: 32px;
                         }
-                        & p{
+
+                        & p {
                             margin: 0 !important;
                         }
                     }
-                    & .mess-number{
-                        & .mdc-fab--mini{
+
+                    & .mess-number {
+                        & .mdc-fab--mini {
                             height: 28px !important;
                             width: 28px !important;
                         }
-                        & .mat-mdc-mini-fab{
-                            box-shadow :none;
+
+                        & .mat-mdc-mini-fab {
+                            box-shadow: none;
                         }
-                        & p{
+
+                        & p {
                             margin: 0 !important;
                             color: #777;
                         }
@@ -308,20 +319,81 @@ body {
             }
 
             & mat-toolbar {
-                color: rgb(36,120,109);
-                & div{
+                color: rgb(36, 120, 109);
+
+                & div {
                     padding: 8px;
                     cursor: pointer;
                 }
-                & p{
+
+                & p {
                     margin: 0 !important;
                 }
+
                 // & mat-icon{
                 // }
             }
         }
     }
 
+}
+
+.chat-card {
+    & mat-toolbar {
+        display: flex;
+        align-items: center;
+        background-color: transparent !important;
+    }
+
+    & mat-card-content {
+        height: calc(100% - 88px);
+        overflow: auto;
+        & .start{
+            .mdc-list-item__content{
+                display: flex;
+                justify-content: flex-start;
+            }
+            & mat-chip-option{
+                background: rgb(242,247,251);
+                color: #111;
+            }
+        }
+        & .end{
+            .mdc-list-item__content{
+                display: flex;
+                justify-content: flex-end;
+            }
+            & mat-chip-option{
+                background: rgb(32,160,144);
+                color: #fff;
+            }
+        }
+    }
+
+    .footer {
+        gap: 4px;
+        & .input-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px;
+            width: 72%;
+            background: rgb(243, 246, 246);
+            border-radius: 8px;
+            & input {
+                width: 92%;
+                padding: 8px;
+                font-size: 16px;
+                outline: none;
+                border: none;
+                background: transparent;
+            }
+            & mat-icon{
+                margin-right: 8px;
+                color: rgb(172 172 172);
+            }
+        }
+    }
 }
 
 .divider-white {
