@@ -230,6 +230,11 @@ body {
   }
 }
 
+.signUp-card{
+  mat-label{
+    color: rgb(31, 105, 97);
+  }
+}
 .main-card {
   padding: 12px 0px 0px 0px;
   max-width: 550px;
@@ -360,6 +365,7 @@ body {
       }
 
       & mat-chip-option {
+        max-width: 80%;
         background: rgb(242, 247, 251);
         color: #111;
       }
@@ -412,6 +418,9 @@ body {
   margin-top: 24px !important;
 }
 
+mat-icon{
+  cursor: pointer;
+}
 ::-webkit-scrollbar {
   width: 0;
   /* Remove scrollbar space */
