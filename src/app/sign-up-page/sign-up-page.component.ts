@@ -5,6 +5,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { confirmPasswordValidator } from '../shared/confirm-password.validator';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { Location } from '@angular/common';
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -16,7 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-sign-up-page',
   standalone: true,
-  imports: [MatCardModule,MatButtonModule,MatInputModule, ReactiveFormsModule],
+  imports: [MatCardModule,MatButtonModule,MatInputModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './sign-up-page.component.html',
   styleUrl: './sign-up-page.component.scss'
 })
@@ -30,26 +33,27 @@ export class SignUpPageComponent implements OnInit {
   { validators: this.passwordMatchValidator }
   )
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+     public location: Location
   ){}
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
     console.log(this.form['confirmPassword']);
-    
+
   }
     get form(){
       return this.signUpForm.controls;
     }
 
     signUp(){
-      
-    } 
-    
+
+    }
+
   passwordMatchValidator(g: FormGroup) {
     const passwordControl = g?.get('password');
     const confirmPasswordControl = g?.get('confirmPassword');
-    
+
     if (passwordControl && confirmPasswordControl) {
       return passwordControl.value === confirmPasswordControl.value ? null : { mismatch: true };
     } else {

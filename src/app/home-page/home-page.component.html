@@ -22,9 +22,9 @@
             <hr class="w-4 h-1">
         </div>
     </mat-card-actions>
-    
+
     <div class="w-10 footer">
-        <button mat-stroked-button class="sign-btn" >Sign up withn Number</button>
-        <h5  class="login-btn"><span> Existing account?</span> Log in</h5>
+        <button mat-stroked-button class="sign-btn" [routerLink]="['/sign-up']" routerLinkActive="router-link-active" >Sign up withn Mail</button>
+        <h5  class="login-btn" [routerLink]="['/login']"><span> Existing account?</span> Log in</h5>
     </div>
 </mat-card>
