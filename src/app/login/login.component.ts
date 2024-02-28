@@ -5,6 +5,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,14 +23,15 @@ export class LoginComponent {
   })
   constructor(
     private fb: FormBuilder,
-    public location: Location
+    public location: Location,
+    private router: Router
   ){}
     get form(){
       return this.loginForm.controls;
     }
 
     login(){
-
+      this.router.navigate(['main']);
     }
     forgotPassword(){
 

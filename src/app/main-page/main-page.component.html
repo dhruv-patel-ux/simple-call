@@ -26,7 +26,7 @@
         <mat-card class="inner-card">
             <mat-list role="list">
                 @for(image of stories;track image.id){
-                <mat-list-item role="listitem">
+                <mat-list-item role="listitem" (click)="goToRoom()">
                     <div class="d-flex align-items-end justify-content-between">
                         <div class="profile-text d-flex align-items-end justify-content-start gap-2">
                             <p-avatar [image]="image.src" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>

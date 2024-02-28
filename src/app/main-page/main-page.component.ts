@@ -8,12 +8,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { TitleCasePipe } from '@angular/common';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule],
+  imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule, RouterLink],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
@@ -64,5 +65,15 @@ export class MainPageComponent {
       src: '../../assets/avatars/dhruv_avatar.jpg',
       name:'Dhruv'
     }
-  ]
+  ];
+
+  constructor(
+    private router: Router
+  ){}
+
+  goToRoom(){
+    console.log("here");
+
+    this.router.navigate(['chat-room'])
+  }
 }

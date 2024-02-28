@@ -1,4 +1,4 @@
-import { TitleCasePipe } from '@angular/common';
+import { Location, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -56,6 +56,10 @@ export class ChatRoomComponent {
       type:'other'
     },
   ]
+  constructor(
+    public location: Location,
+
+  ){}
   inputValue:any = '';
   ngOnInit():void{
 
