@@ -7,7 +7,11 @@ import { confirmPasswordValidator } from '../shared/confirm-password.validator';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Location } from '@angular/common';
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,6 +28,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrl: './sign-up-page.component.scss'
 })
 export class SignUpPageComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  openSnackBar() {
+    this._snackBar.open('Cannonball!!', 'Splash', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
   signUpForm:FormGroup = this.fb.group({
     name:['',[Validators.required]],
     email:['',[Validators.required,Validators.email]],
@@ -34,7 +47,8 @@ export class SignUpPageComponent implements OnInit {
   )
   constructor(
     private fb: FormBuilder,
-     public location: Location
+     public location: Location,
+     private _snackBar: MatSnackBar
   ){}
   matcher = new MyErrorStateMatcher();
 
@@ -47,7 +61,7 @@ export class SignUpPageComponent implements OnInit {
     }
 
     signUp(){
-
+      
     }
 
   passwordMatchValidator(g: FormGroup) {
