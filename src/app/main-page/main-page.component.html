@@ -7,25 +7,25 @@
             <mat-icon>search</mat-icon>
         </div>
         <h2>Simple Chat</h2>
-        <div style="height: 32px;">
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <p-avatar image="../../assets/avatars/dhruv_avatar.jpg" styleClass="mr-2" size="xlarge"
-                shape="circle"></p-avatar>
+        <div class="img-container">
+            <button class="profile-img" mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu">
+                <img src="../../assets/avatars/dhruv_avatar.jpg" height="48px" width="48px" />
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item>
-                  <mat-icon>dialpad</mat-icon>
-                  <span>Redial</span>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Redial</span>
                 </button>
                 <button mat-menu-item disabled>
-                  <mat-icon>voicemail</mat-icon>
-                  <span>Check voice mail</span>
+                    <mat-icon>voicemail</mat-icon>
+                    <span>Check voice mail</span>
                 </button>
                 <button mat-menu-item>
-                  <mat-icon>notifications_off</mat-icon>
-                  <span>Disable alerts</span>
+                    <mat-icon>notifications_off</mat-icon>
+                    <span>Disable alerts</span>
                 </button>
-              </mat-menu>
+            </mat-menu>
         </div>
     </mat-toolbar>
     <mat-card-content class="mt-2">
@@ -33,7 +33,11 @@
             @for(image of stories;track image.id){
             <div class="stories-box d-flex flex-column align-items-center">
                 <div class="stories-box-img">
-                    <p-avatar [image]="image.src" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                    <div class="img-container">
+                        <button class="profile-img" mat-icon-button aria-label="Example icon-button with a menu">
+                            <img [src]="image.src">
+                        </button>
+                    </div>
                 </div>
                 <p>{{image.name | titlecase}}</p>
             </div>
@@ -45,7 +49,12 @@
                 <mat-list-item role="listitem" (click)="goToRoom()">
                     <div class="d-flex align-items-end justify-content-between">
                         <div class="profile-text d-flex align-items-end justify-content-start gap-2">
-                            <p-avatar [image]="image.src" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+                            <div class="img-container">
+                                <button class="profile-img" mat-icon-button
+                                    aria-label="Example icon-button with a menu">
+                                    <img [src]="image.src">
+                                </button>
+                            </div>
                             <p>{{image.name | titlecase}}</p>
                         </div>
                         <div class="mess-number">

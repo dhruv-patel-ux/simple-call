@@ -1,0 +1,21 @@
+<div class="video d-flex flex-column">
+    <div class="p d-flex justify-content-start align-items-center">
+        <mat-icon class="back-btn me-1" (click)="location.back()">keyboard_backspace</mat-icon>
+        <mat-icon (click)="imageSrc = ''">close</mat-icon>
+    </div>
+
+    <div class="camera-container">
+        @if(!imageSrc){
+            <video #videoElement autoplay ></video>
+            <canvas #canvasElement style="display: none;"></canvas>
+        }
+        @else {
+            <div class="d-flex justify-content-center flex-column h-10 w-10 ">
+                <img [src]="imageSrc" alt="" height="70%" width="100%">   
+            </div>
+        }
+    </div>
+    <div  class="click-image-icon d-flex justify-content-center p">
+        <mat-icon (click)="takePhoto()">radio_button_checked</mat-icon>
+    </div>
+</div>
