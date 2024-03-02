@@ -8,8 +8,24 @@
         </div>
         <h2>Simple Chat</h2>
         <div style="height: 32px;">
-            <p-avatar image="../../assets/avatars/dhruv_avatar.jpg" styleClass="mr-2" size="xlarge"
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <p-avatar image="../../assets/avatars/dhruv_avatar.jpg" styleClass="mr-2" size="xlarge"
                 shape="circle"></p-avatar>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>dialpad</mat-icon>
+                  <span>Redial</span>
+                </button>
+                <button mat-menu-item disabled>
+                  <mat-icon>voicemail</mat-icon>
+                  <span>Check voice mail</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>notifications_off</mat-icon>
+                  <span>Disable alerts</span>
+                </button>
+              </mat-menu>
         </div>
     </mat-toolbar>
     <mat-card-content class="mt-2">

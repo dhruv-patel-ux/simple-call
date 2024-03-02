@@ -421,6 +421,16 @@ body {
 mat-icon{
   cursor: pointer;
 }
+.mat-mdc-snack-bar-container .mdc-snackbar__surface{
+  background-color: inherit !important;
+}
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled){
+  color: #fff !important;
+}
+.success-snackbar{
+    background-color: rgb(36, 120, 109) !important; ;
+}
+.error-snackbar{}
 ::-webkit-scrollbar {
   width: 0;
   /* Remove scrollbar space */

@@ -27,11 +27,11 @@
   <form class="example-form" [formGroup]="loginForm">
     <mat-form-field class="example-full-width w-10">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" placeholder="Enter Your Email">
-      @if (form['email'].hasError('email') && !form['email'].hasError('required')) {
+      <input matInput formControlName="username" type="email" placeholder="Enter Your Email">
+      @if (form['username'].hasError('email') && !form['username'].hasError('required')) {
       <mat-error>Please enter a valid email address</mat-error>
       }
-      @if (form['email'].hasError('required')) {
+      @if (form['username'].hasError('required')) {
       <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>

@@ -41,8 +41,7 @@
                 @if (form['confirmPassword'].hasError('required')) {
                 <mat-error>Confirm Password is <strong>required</strong></mat-error>
                 }
-                @if(signUpForm.hasError('mismatch') && (signUpForm.get('confirmPassword')?.dirty ||
-                signUpForm.get('confirmPassword')?.touched)){
+                @if(signUpForm.hasError('mismatch') || submit){
                 <mat-error>
                     Passwords do not match.
                 </mat-error>

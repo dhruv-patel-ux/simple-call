@@ -9,12 +9,13 @@ import { TitleCasePipe } from '@angular/common';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { Router, RouterLink } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule, RouterLink],
+  imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule, RouterLink, MatMenuModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })

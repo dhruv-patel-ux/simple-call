@@ -12,6 +12,9 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { ApiService } from '../common/api-service/api-service.service';
+import { Router } from '@angular/router';
+import { SnackbarService } from '../common/models/snekbar.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -23,46 +26,57 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-sign-up-page',
   standalone: true,
-  imports: [MatCardModule,MatButtonModule,MatInputModule, ReactiveFormsModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './sign-up-page.component.html',
   styleUrl: './sign-up-page.component.scss'
 })
 export class SignUpPageComponent implements OnInit {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  openSnackBar() {
-    this._snackBar.open('Cannonball!!', 'Splash', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
-  }
-  signUpForm:FormGroup = this.fb.group({
-    name:['',[Validators.required]],
-    email:['',[Validators.required,Validators.email]],
-    password:['',[Validators.required]],
-    confirmPassword:['',[Validators.required]],
+  signUpForm: FormGroup = this.fb.group({
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+    confirmPassword: ['', [Validators.required]],
   },
-  { validators: this.passwordMatchValidator }
+    { validators: this.passwordMatchValidator }
   )
   constructor(
     private fb: FormBuilder,
-     public location: Location,
-     private _snackBar: MatSnackBar
-  ){}
+    public location: Location,
+    private snackBarService: SnackbarService, 
+    private apiService: ApiService,
+    private router: Router
+  ) { }
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-    console.log(this.form['confirmPassword']);
-
   }
-    get form(){
-      return this.signUpForm.controls;
-    }
+  get form() {
+    return this.signUpForm.controls;
+  }
 
-    signUp(){
-      
+  submit = false;
+  signUp() {
+    this.signUpForm.markAllAsTouched();
+    if (this.signUpForm.value.password != this.signUpForm.value.confirmPassword) {
+      this.submit = true
+      this.snackBarService.openErrorSnackBar("Password Not Match")
+      return
     }
+    this.apiService.signup(this.signUpForm.value).subscribe(
+      (res:any)=>{
+      if(res.status){
+        localStorage.setItem('ACCESS_TOKEN',res.accessToken)
+        localStorage.setItem('USER',res.data)
+        this.snackBarService.openSuccessSnackBar(res.message);
+        this.router.navigate(['main']);
+      }else{
+        this.snackBarService.openErrorSnackBar(res.message);
+      }
+    },(error: any) =>{
+      this.snackBarService.openErrorSnackBar(error.message);
+    });
+  }
 
   passwordMatchValidator(g: FormGroup) {
     const passwordControl = g?.get('password');
