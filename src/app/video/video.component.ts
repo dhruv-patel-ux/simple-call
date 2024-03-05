@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -35,7 +35,7 @@ export class VideoComponent {
       console.error('getUserMedia is not supported');
     }
   }
-  imageSrc = ''
+  imageSrc = signal('');
   takePhoto() {
     if (this.videoStream) {
       const video = this.videoElement.nativeElement;
@@ -51,9 +51,12 @@ export class VideoComponent {
 
       // Convert canvas image to base64 data URL
       const imageData = canvas.toDataURL('image/png');
-      this.imageSrc = imageData;
+      this.imageSrc.set(imageData);
       // Do something with the captured image, such as display it or send it to a server
-      console.log('Captured image:', imageData);
     }
+  }
+  clearimg(){
+    this.imageSrc.set('');
+    this.openCamera();
   }
 }

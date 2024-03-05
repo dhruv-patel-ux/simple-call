@@ -26,9 +26,12 @@ export const routes: Routes = [
     path: 'chat-room',
     loadComponent: () => import('./chat-room/chat-room.component').then(c => c.ChatRoomComponent)
   },
-  
   {
     path: 'camara',
     loadComponent: () => import('./video/video.component').then(c => c.VideoComponent)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/profile.component').then(c => c.ProfileComponent)
   },
 ];

@@ -1,0 +1,36 @@
+<mat-card style="background-color: rgb(36,120,109); color: #fff; height: 100%; display: flex; flex-direction: column;">
+    <div>
+        <mat-icon class="back-btn me-1" (click)="location.back()">keyboard_backspace</mat-icon>
+        <mat-card-header class="justify-content-center">
+            <mat-card-title>
+                <div class="img-container">
+                    <div class="profile-img" style="height: 142px !important; width: 142px !important;">
+                        <img src="../../assets/avatars/dhruv_avatar.jpg" height="128px" width="128px" />
+                    </div>
+                </div>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <h3 class="d-flex justify-content-center" style="color: #fff;">{{name()}}</h3>
+            </mat-card-subtitle>
+        </mat-card-header>
+    </div>
+    <mat-divider style="background-color: #fff; height: 1px;"></mat-divider>
+    <mat-card-content style="margin-top: 24px; display: flex !important; justify-content: center; align-items: center; flex-direction: column;">
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Telephone</mat-label>
+                <span matTextPrefix>+1 &nbsp;</span>
+                <input type="tel" matInput placeholder="555-555-1234">
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+        </form>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Telephone</mat-label>
+                <span matTextPrefix>+1 &nbsp;</span>
+                <input type="tel" matInput placeholder="555-555-1234">
+                <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+</mat-card>

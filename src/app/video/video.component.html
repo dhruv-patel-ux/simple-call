@@ -1,17 +1,17 @@
 <div class="video d-flex flex-column">
     <div class="p d-flex justify-content-start align-items-center">
         <mat-icon class="back-btn me-1" (click)="location.back()">keyboard_backspace</mat-icon>
-        <mat-icon (click)="imageSrc = ''">close</mat-icon>
+        <mat-icon (click)="clearimg()">close</mat-icon>
     </div>
 
     <div class="camera-container">
-        @if(!imageSrc){
+        @if(!imageSrc()){
             <video #videoElement autoplay ></video>
             <canvas #canvasElement style="display: none;"></canvas>
         }
         @else {
             <div class="d-flex justify-content-center flex-column h-10 w-10 ">
-                <img [src]="imageSrc" alt="" height="70%" width="100%">   
+                <img [src]="imageSrc()" alt="" height="70%" width="100%">   
             </div>
         }
     </div>
