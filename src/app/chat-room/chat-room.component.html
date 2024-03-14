@@ -36,7 +36,7 @@
     @if(inputValue.length > 0){
     <div class="d-flex justify-content-center align-items-center">
       <mat-chip-listbox aria-label="Fish selection">
-        <mat-chip-option><mat-icon>send</mat-icon></mat-chip-option>
+        <mat-chip-option (click)="sendMessage()"><mat-icon>send</mat-icon></mat-chip-option>
       </mat-chip-listbox>
 
     </div>

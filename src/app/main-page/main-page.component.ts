@@ -67,14 +67,15 @@ export class MainPageComponent {
       name:'Dhruv'
     }
   ];
+  message: string | undefined;
+  messages: string[] = [];
 
   constructor(
-    private router: Router
+    private router: Router,
   ){}
 
   goToRoom(){
-    console.log("here");
-
     this.router.navigate(['chat-room'])
   }
+
 }
