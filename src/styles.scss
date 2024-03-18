@@ -49,9 +49,17 @@ body {
 .gap-2 {
   gap: 12px;
 }
-
+.gap-3{
+  gap: 24px;
+}
+.gap-4{
+  gap: 42px;
+}
 .justify-content-between {
   justify-content: space-between;
+}
+.justify-content-around {
+  justify-content: space-around;
 }
 
 .justify-content-end {
@@ -146,9 +154,10 @@ body {
   height: 100%;
 }
 
-.p{
+.p {
   padding: 12px;
 }
+
 .me-1 {
   margin-right: 8px;
 }
@@ -243,27 +252,55 @@ body {
     color: rgb(31, 105, 97);
   }
 }
-.img-container{
+
+.img-container {
   .profile-img {
     height: 52px !important;
     width: 52px !important;
     position: relative;
-    
+
+    .edit-container {
+      display: none;
+    }
+
     img {
-          position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    border-radius: 50%;
-    object-fit: fill;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      border-radius: 50%;
+      object-fit: fill;
     }
   }
 }
-.mat-toolbar-row, .mat-toolbar-single-row{
+
+.profile-img:hover {
+  .edit-container {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    & mat-icon {
+      font-size: 24px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  img {
+    opacity: .4;
+  }
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
   // padding: 0px !important;
 }
+
 .main-card {
   padding: 12px 0px 0px 0px;
   max-width: 550px;
@@ -376,11 +413,13 @@ body {
   }
 
 }
-.video{
+
+.video {
   height: 100%;
   width: 100%;
-  & .click-image-icon{
-    mat-icon{
+
+  & .click-image-icon {
+    mat-icon {
       color: #777;
       width: 48px;
       height: 48px;
@@ -388,6 +427,7 @@ body {
     }
   }
 }
+
 .camera-container {
   // position: fixed;
   // top: 0;
@@ -468,7 +508,14 @@ video {
     }
   }
 }
-
+// .edit-popup{
+//   width: 100%;
+//   height: 194px;
+//   position: absolute;
+//   border-radius: 24px 24px 0 0;
+//   bottom: 0;
+//   background: aliceblue;
+// }
 .divider-white {
   background-color: #fff;
   margin-top: 24px !important;

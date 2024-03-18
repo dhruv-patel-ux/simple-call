@@ -4,6 +4,7 @@ import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,11 @@ import {MatDividerModule} from '@angular/material/divider';
 export class ProfileComponent {
 name = signal('Dhruv');
 constructor(
-  public location: Location
+  public location: Location,
+  private router: Router
 ){}
+edit_profile(src: any){
+  console.log(src);
+  this.router.navigate(['profile/1'])
+}
 }

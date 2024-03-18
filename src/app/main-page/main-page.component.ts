@@ -6,10 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { AvatarModule } from 'primeng/avatar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TitleCasePipe } from '@angular/common';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatListModule} from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 import { Router, RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
+import { ApiService } from '../common/api-service/api-service.service';
+import { ChatService } from '../common/service/chat-service.service';
 
 
 @Component({
@@ -20,51 +22,53 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './main-page.component.scss'
 })
 export class MainPageComponent {
-  stories:Array<any> = [
+
+
+  stories: Array<any> = [
     {
       id: 1,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'my status'
+      name: 'my status'
     },
     {
       id: 2,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     },
     {
       id: 3,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     },
     {
       id: 4,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     },
     {
       id: 5,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     },
     {
       id: 6,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     },
     {
       id: 7,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     }
-    ,{
+    , {
       id: 8,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     },
     {
       id: 9,
       src: '../../assets/avatars/dhruv_avatar.jpg',
-      name:'Dhruv'
+      name: 'Dhruv'
     }
   ];
   message: string | undefined;
@@ -72,10 +76,32 @@ export class MainPageComponent {
 
   constructor(
     private router: Router,
-  ){}
+    private apiService: ApiService,
+    private chatService: ChatService
+  ) { 
+    this.getLiveusers()
 
-  goToRoom(){
+  }
+  profile_img: any;
+  ngOnInit() {
+    this.apiService.profile_photo.subscribe((value: any) => {
+      this.profile_img = value;
+    });
+    
+    this.profile_img= localStorage.getItem('profile-image');
+  }
+  goToRoom() {
     this.router.navigate(['chat-room'])
   }
-
+  getLiveusers(){
+    this.chatService.getUsers().subscribe((user: any)=>{
+      console.log(user);
+      
+    })
+  }
+  logout() {
+    localStorage.setItem('USER', '');
+    localStorage.setItem('ACCESS_TOKEN', '');
+    this.router.navigate(['login'])
+  }
 }

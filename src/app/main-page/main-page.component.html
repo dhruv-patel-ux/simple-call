@@ -10,7 +10,7 @@
         <div class="img-container">
             <button class="profile-img" mat-icon-button [matMenuTriggerFor]="menu"
                 aria-label="Example icon-button with a menu">
-                <img src="../../assets/avatars/dhruv_avatar.jpg" height="48px" width="48px" />
+                <img [src]="profile_img" height="48px" width="48px" />
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item>
@@ -21,6 +21,9 @@
                 </button>
                 <button mat-menu-item routerLink="/profile">
                     <span>Profile</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <span>Logout</span>
                 </button>
             </mat-menu>
         </div>

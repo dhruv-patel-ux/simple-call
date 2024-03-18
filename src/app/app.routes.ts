@@ -32,6 +32,15 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('./profile/profile.component').then(c => c.ProfileComponent)
+    children:[
+      {
+        path:'',
+        loadComponent: () => import('./profile/profile.component').then(c => c.ProfileComponent)
+      },
+      {
+        path:':id',
+        loadComponent: () => import('./profile/profile-photo-edit/profile-photo-edit.component').then(c => c.ProfilePhotoEditComponent)
+      }
+    ]
   },
 ];
