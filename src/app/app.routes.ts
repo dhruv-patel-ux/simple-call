@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadComponent: () => import('./main-page/main-page.component').then(c => c.MainPageComponent)
   },
   {
-    path: 'chat-room',
+    path: 'chat-room/:id',
     loadComponent: () => import('./chat-room/chat-room.component').then(c => c.ChatRoomComponent)
   },
   {

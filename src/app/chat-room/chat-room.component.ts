@@ -11,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { VideoComponent } from '../video/video.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../common/service/chat-service.service';
 
 
@@ -60,12 +60,20 @@ export class ChatRoomComponent {
       type: 'other'
     },
   ]
+  RoomUserId:any;
   constructor(
     public location: Location,
     public dialog: MatDialog,
     private router: Router,
-    private chatService: ChatService
-  ) { }
+    private chatService: ChatService,
+    private activateRoute: ActivatedRoute
+  ) {
+    activateRoute.paramMap.subscribe((param: any)=>{
+      
+      this.RoomUserId = param.params.id
+      console.log(this.RoomUserId);
+    })
+   }
   inputValue: any = '';
 
   openCamera() {
