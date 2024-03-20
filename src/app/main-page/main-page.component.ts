@@ -91,7 +91,7 @@ export class MainPageComponent {
       this.profile_img = value;
     });
 
-    this.profile_img = localStorage.getItem('profile-image');
+    this.profile_img = this.apiService.getLocalImage()
     this.searchInput.valueChanges.pipe(
      debounceTime(300),
      distinctUntilChanged() 
@@ -101,14 +101,20 @@ export class MainPageComponent {
     })
   }
   goToRoom(id: any) {
-    this.router.navigate([`chat-room/${id}`])
+    const localUser = this.apiService.getLocalUser()
+    this.apiService.GetRoom([id,localUser._id]).subscribe((res:any)=>{
+      console.log(res);
+      const roomId = res.data.roomId;
+      this.chatService.joinRoom(roomId);
+      this.router.navigate([`chat-room/${roomId}`])
+    })
   }
   getLiveusers() {
     this.chatService.getUsers().subscribe((user: any) => {
       // this.users = user
-      console.log(this.stories);
-      let loginUser = localStorage.getItem('USER')
-      loginUser = loginUser && JSON.parse(loginUser);
+      
+      // let loginUser = localStorage.getItem('USER')
+      // loginUser = loginUser && JSON.parse(loginUser);
 
     })
   }
@@ -119,8 +125,7 @@ export class MainPageComponent {
     })
   }
   logout() {
-    localStorage.setItem('USER', '');
-    localStorage.setItem('ACCESS_TOKEN', '');
+    this.apiService.logout()
     this.router.navigate(['login'])
   }
 }

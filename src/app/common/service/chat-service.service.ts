@@ -6,21 +6,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChatService {
-  private socket:any
+  private socket: any
   constructor() {
     let token = localStorage.getItem('ACCESS_TOKEN');
     console.log(token);
-    
+
     this.socket = io(`http://localhost:9999?authorization=${token}`,
       {
         transports: ['websocket'],
         extraHeaders: {
           Authorization: `Bearer ${token}`
         }
-    });
+      });
   }
 
-  getUsers(){
+  getUsers() {
     let observable = new Observable<{ user: String, message: String }>(observer => {
       this.socket.on('live-users', (data: any) => {
         observer.next(data);
@@ -30,18 +30,27 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(message: any) {
-    this.socket.emit('ping', message);
+  sendMessage(message: any, roomId: any,userId:any) {
+    this.socket.emit('message',{message,roomId,userId});
   }
 
   getMessages() {
     let observable = new Observable<{ user: String, message: String }>(observer => {
-      this.socket.on('pong', (data: any) => {
+      this.socket.on('message', (data: any) => {
+        console.log(data);
+        
         observer.next(data);
       });
       return () => { this.socket.disconnect(); };
     });
     return observable;
+  }
+  joinRoom(roomId: any) {
+    this.socket.emit('joinRoom', roomId);
+    return
+  }
+  leaveRoom(roomId: any) {
+    this.socket.emit('leaveRoom', roomId);
   }
 }
 

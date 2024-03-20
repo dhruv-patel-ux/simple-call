@@ -12,6 +12,19 @@ export class ApiService {
   constructor(
     private http: HttpClient
   ) { }
+
+  getLocalUser(){
+    const localUser = localStorage.getItem("USER");
+    return localUser && JSON.parse(localUser);
+  }
+  getLocalImage(){
+    return localStorage.getItem('profile-image');
+  }
+  logout(){
+    localStorage.setItem('USER', '');
+    localStorage.setItem('ACCESS_TOKEN', '');
+    return
+  }
   signup(data: any): Observable<any> {
     return this.http.post(`${this.base_url}/users/sign-up`, data)
   }
@@ -27,4 +40,9 @@ export class ApiService {
   GetAllUsers(SearchTerm?: any) {
     return this.http.get(`${this.base_url}/users?SearchTerm=${SearchTerm}`)
   }
+  
+  GetRoom(data: any){
+    return this.http.post(`${this.base_url}/rooms`,data)
+  }
+
 }

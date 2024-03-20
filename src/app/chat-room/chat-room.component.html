@@ -16,14 +16,15 @@
   </mat-toolbar>
   <mat-card-content class="mt-2">
     <mat-list role="list" #chatContainer>
-      @for(message of messageArr.slice().reverse();track message?.type){
+      {{RoomId}}
+      <!-- @for(message of messageArr.slice().reverse();track message?.type){
       <mat-list-item role="listitem" [class]="message?.type == 'me' ? 'end' : 'start'">
         <mat-chip-set aria-label="Dog selection">
           <mat-chip>
             {{message?.message}}</mat-chip>
         </mat-chip-set>
       </mat-list-item>
-      }
+      } -->
     </mat-list>
   </mat-card-content>
   <mat-toolbar class="footer d-flex align-items-center justify-content-between">

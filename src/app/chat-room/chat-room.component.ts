@@ -13,6 +13,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { VideoComponent } from '../video/video.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../common/service/chat-service.service';
+import { ApiService } from '../common/api-service/api-service.service';
 
 
 @Component({
@@ -24,54 +25,53 @@ import { ChatService } from '../common/service/chat-service.service';
 })
 export class ChatRoomComponent {
   messageArr = [
-    {
-      message: "hi",
-      type: 'me'
-    },
-    {
-      message: "hello",
-      type: 'other'
-    }, {
-      message: "hi",
-      type: 'me'
-    }, {
-      message: "hello",
-      type: 'other'
-    }, {
-      message: "hi",
-      type: 'me'
-    }, {
-      message: "hello",
-      type: 'other'
-    }, , {
-      message: "hi",
-      type: 'me'
-    }, {
-      message: "hello",
-      type: 'other'
-    }, , {
-      message: "hi",
-      type: 'me'
-    }, {
-      message: "hi",
-      type: 'me'
-    }, {
-      message: "hello",
-      type: 'other'
-    },
+    // {
+    //   message: "hi",
+    //   type: 'me'
+    // },
+    // {
+    //   message: "hello",
+    //   type: 'other'
+    // }, {
+    //   message: "hi",
+    //   type: 'me'
+    // }, {
+    //   message: "hello",
+    //   type: 'other'
+    // }, {
+    //   message: "hi",
+    //   type: 'me'
+    // }, {
+    //   message: "hello",
+    //   type: 'other'
+    // }, , {
+    //   message: "hi",
+    //   type: 'me'
+    // }, {
+    //   message: "hello",
+    //   type: 'other'
+    // }, , {
+    //   message: "hi",
+    //   type: 'me'
+    // }, {
+    //   message: "hi",
+    //   type: 'me'
+    // }, {
+    //   message: "hello",
+    //   type: 'other'
+    // },
   ]
-  RoomUserId:any;
+  RoomId:any;
   constructor(
     public location: Location,
     public dialog: MatDialog,
     private router: Router,
     private chatService: ChatService,
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private apiService: ApiService
   ) {
     activateRoute.paramMap.subscribe((param: any)=>{
-      
-      this.RoomUserId = param.params.id
-      console.log(this.RoomUserId);
+      this.RoomId = param.params.id;
     })
    }
   inputValue: any = '';
@@ -94,14 +94,12 @@ export class ChatRoomComponent {
   messages: string[] = [];
   ngOnInit() {
     this.chatService.getMessages().subscribe((message: any) => {
-      console.log("get New Message", message);
-
-      this.messages.push(message);
+      this.messages.push(message)      
     });
   }
 
   sendMessage() {
-    this.chatService.sendMessage(this.inputValue);
+    this.chatService.sendMessage(this.inputValue,this.RoomId,this.apiService.getLocalUser()._id);
     this.inputValue = '';
   }
 }
