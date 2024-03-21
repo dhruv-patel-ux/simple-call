@@ -9,8 +9,6 @@ export class ChatService {
   private socket: any
   constructor() {
     let token = localStorage.getItem('ACCESS_TOKEN');
-    console.log(token);
-
     this.socket = io(`http://localhost:9999?authorization=${token}`,
       {
         transports: ['websocket'],
@@ -37,8 +35,6 @@ export class ChatService {
   getMessages() {
     let observable = new Observable<{ user: String, message: String }>(observer => {
       this.socket.on('message', (data: any) => {
-        console.log(data);
-        
         observer.next(data);
       });
       return () => { this.socket.disconnect(); };

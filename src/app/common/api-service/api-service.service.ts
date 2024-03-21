@@ -45,4 +45,11 @@ export class ApiService {
     return this.http.post(`${this.base_url}/rooms`,data)
   }
 
+  GetAllRoom(userId: any){
+    return this.http.get(`${this.base_url}/rooms?userId=${userId}`)
+  }
+  getRoomMessageList(roomId: any){
+    return this.http.get(`${this.base_url}/room-chat/${roomId}`)
+  }
+  
 }

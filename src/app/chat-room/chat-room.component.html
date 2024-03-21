@@ -4,9 +4,9 @@
       <mat-icon (click)="location.back()" class="me-1">keyboard_backspace</mat-icon>
       <div class="img-container me-1">
         <button class="profile-img" mat-icon-button aria-label="Example icon-button with a menu">
-          <img src="../../assets/avatars/dhruv_avatar.jpg"/>
+          <img src="../../assets/avatars/dhruv_avatar.jpg" />
         </button>
-    </div>
+      </div>
       <h2>Simple Chat</h2>
     </div>
     <div>
@@ -16,15 +16,14 @@
   </mat-toolbar>
   <mat-card-content class="mt-2">
     <mat-list role="list" #chatContainer>
-      {{RoomId}}
-      <!-- @for(message of messageArr.slice().reverse();track message?.type){
-      <mat-list-item role="listitem" [class]="message?.type == 'me' ? 'end' : 'start'">
+      @for(message of messages;track message?.message){
+      <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'">
         <mat-chip-set aria-label="Dog selection">
           <mat-chip>
             {{message?.message}}</mat-chip>
         </mat-chip-set>
       </mat-list-item>
-      } -->
+      }
     </mat-list>
   </mat-card-content>
   <mat-toolbar class="footer d-flex align-items-center justify-content-between">

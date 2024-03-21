@@ -15,7 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../common/service/chat-service.service';
 import { ApiService } from '../common/api-service/api-service.service';
 
-
 @Component({
   selector: 'app-chat-room',
   standalone: true,
@@ -24,44 +23,10 @@ import { ApiService } from '../common/api-service/api-service.service';
   styleUrl: './chat-room.component.scss'
 })
 export class ChatRoomComponent {
-  messageArr = [
-    // {
-    //   message: "hi",
-    //   type: 'me'
-    // },
-    // {
-    //   message: "hello",
-    //   type: 'other'
-    // }, {
-    //   message: "hi",
-    //   type: 'me'
-    // }, {
-    //   message: "hello",
-    //   type: 'other'
-    // }, {
-    //   message: "hi",
-    //   type: 'me'
-    // }, {
-    //   message: "hello",
-    //   type: 'other'
-    // }, , {
-    //   message: "hi",
-    //   type: 'me'
-    // }, {
-    //   message: "hello",
-    //   type: 'other'
-    // }, , {
-    //   message: "hi",
-    //   type: 'me'
-    // }, {
-    //   message: "hi",
-    //   type: 'me'
-    // }, {
-    //   message: "hello",
-    //   type: 'other'
-    // },
-  ]
   RoomId:any;
+  currentUser:any;
+  messages: Array<any> = [];
+
   constructor(
     public location: Location,
     public dialog: MatDialog,
@@ -73,9 +38,15 @@ export class ChatRoomComponent {
     activateRoute.paramMap.subscribe((param: any)=>{
       this.RoomId = param.params.id;
     })
+    this.currentUser = this.apiService.getLocalUser();
+    apiService.getRoomMessageList(this.RoomId).subscribe((res:any)=>{
+      console.log(res);
+      this.messages =res
+      
+    })
    }
   inputValue: any = '';
-
+  
   openCamera() {
     // Check if getUserMedia is available
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -91,13 +62,16 @@ export class ChatRoomComponent {
     }
   }
 
-  messages: string[] = [];
   ngOnInit() {
     this.chatService.getMessages().subscribe((message: any) => {
-      this.messages.push(message)      
+      this.messages.push(message) 
+      console.log(message);
+           
     });
   }
-
+  ngOnDestroy(){
+    this.chatService.leaveRoom(this.RoomId)
+  }
   sendMessage() {
     this.chatService.sendMessage(this.inputValue,this.RoomId,this.apiService.getLocalUser()._id);
     this.inputValue = '';
