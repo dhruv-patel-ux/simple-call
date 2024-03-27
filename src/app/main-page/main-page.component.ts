@@ -90,31 +90,35 @@ export class MainPageComponent {
     this.apiService.profile_photo.subscribe((value: any) => {
       this.profile_img = value;
     });
-    this.apiService.GetAllRoom(this.apiService.getLocalUser()._id).subscribe((res:any)=>{
+    this.apiService.GetAllRoom(this.apiService.getLocalUser()._id).subscribe((res: any) => {
       console.log(res);
-      this.users =res
+      this.users = res
     })
     this.profile_img = this.apiService.getLocalImage()
     this.searchInput.valueChanges.pipe(
-     debounceTime(300),
-     distinctUntilChanged() 
+      debounceTime(300),
+      distinctUntilChanged()
     ).subscribe((value: any) => {
       this.GetAllUsers(value);
 
     })
   }
-  goToRoom(id: any) {
-    const localUser = this.apiService.getLocalUser()
-    this.apiService.GetRoom([id,localUser._id]).subscribe((res:any)=>{
-      const roomId = res.data.roomId;
-      this.chatService.joinRoom(roomId);
+  goToRoom(id: any, roomId?: any) {
+    if (roomId) {
       this.router.navigate([`chat-room/${roomId}`])
-    })
+    } else {
+      const localUser = this.apiService.getLocalUser()
+      this.apiService.GetRoom([id, localUser._id]).subscribe((res: any) => {
+        const roomId = res.data.roomId;
+        this.chatService.joinRoom(roomId);
+        this.router.navigate([`chat-room/${roomId}`])
+      })
+    }
   }
   getLiveusers() {
     this.chatService.getUsers().subscribe((user: any) => {
       // this.users = user
-      
+
       // let loginUser = localStorage.getItem('USER')
       // loginUser = loginUser && JSON.parse(loginUser);
 
@@ -122,7 +126,7 @@ export class MainPageComponent {
   }
   GetAllUsers(value: any) {
     this.apiService.GetAllUsers(value).subscribe((users: any) => {
-      this.users =users
+      this.users = users
     })
   }
   logout() {

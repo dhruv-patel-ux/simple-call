@@ -1,71 +1,70 @@
 <mat-card class="main-card h-10">
-    <mat-toolbar class="d-flex justify-content-between align-items-center">
-        <input class="search-box" [formControl]="searchInput" type="text">
-        <h2>Simple Chat</h2>
-        <div class="img-container">
-            <button class="profile-img" mat-icon-button [matMenuTriggerFor]="menu"
-                aria-label="Example icon-button with a menu">
-                <img [src]="profile_img" height="48px" width="48px" />
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <span>New Group</span>
+  <mat-toolbar class="d-flex justify-content-between align-items-center">
+    <input class="search-box" [formControl]="searchInput" type="text">
+    <h2>Simple Chat</h2>
+    <div class="img-container">
+      <button class="profile-img" mat-icon-button [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu">
+        <img [src]="profile_img" height="48px" width="48px" />
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <span>New Group</span>
+        </button>
+        <button mat-menu-item>
+          <span>New Broadcast</span>
+        </button>
+        <button mat-menu-item routerLink="/profile">
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+  <mat-card-content class="mt-2">
+    <mat-card class="inner-card">
+      <mat-list role="list">
+        @for(user of users;track user._id){
+        <mat-list-item role="listitem" (click)="goToRoom(user?.toUserId[0],user?.roomId)">
+          <div class="d-flex align-items-end justify-content-between">
+            <div class="profile-text d-flex align-items-end justify-content-start gap-2">
+              <div class="img-container">
+                <button class="profile-img" mat-icon-button aria-label="Example icon-button with a menu">
+                  <img [src]="'http://localhost:9999/'+user?.ToUserProfile[0]?.avatar" alt="">
                 </button>
-                <button mat-menu-item>
-                    <span>New Broadcast</span>
-                </button>
-                <button mat-menu-item routerLink="/profile">
-                    <span>Profile</span>
-                </button>
-                <button mat-menu-item (click)="logout()">
-                    <span>Logout</span>
-                </button>
-            </mat-menu>
+              </div>
+              <p>{{user?.lastMessage | titlecase}}</p>
+            </div>
+            <div class="mess-number">
+              <p>2 min ago</p>
+              <button mat-mini-fab color="warn" aria-label="Example icon button with a home icon">
+                3
+              </button>
+            </div>
+          </div>
+        </mat-list-item>
+        }
+      </mat-list>
+      <mat-toolbar class="justify-content-between">
+        <div class="d-flex align-items-center flex-column">
+          <mat-icon> chat_bubble_outline</mat-icon>
+          <p>Messages</p>
         </div>
-    </mat-toolbar>
-    <mat-card-content class="mt-2">
-        <mat-card class="inner-card">
-            <mat-list role="list">
-                @for(user of users;track user._id){
-                <mat-list-item role="listitem" (click)="goToRoom(user._id)">
-                    <div class="d-flex align-items-end justify-content-between">
-                        <div class="profile-text d-flex align-items-end justify-content-start gap-2">
-                            <div class="img-container">
-                                <button class="profile-img" mat-icon-button
-                                    aria-label="Example icon-button with a menu">
-                                    <img [src]="'http://localhost:9999/'+user.avatar">
-                                </button>
-                            </div>
-                            <p>{{user.name | titlecase}}</p>
-                        </div>
-                        <div class="mess-number">
-                            <p>2 min ago</p>
-                            <button mat-mini-fab color="warn" aria-label="Example icon button with a home icon">
-                                3
-                            </button>
-                        </div>
-                    </div>
-                </mat-list-item>
-                }
-            </mat-list>
-            <mat-toolbar class="justify-content-between">
-                <div class="d-flex align-items-center flex-column">
-                    <mat-icon> chat_bubble_outline</mat-icon>
-                    <p>Messages</p>
-                </div>
-                <div class="d-flex align-items-center flex-column">
-                    <mat-icon>phone_forwarded</mat-icon>
-                    <p>Calls</p>
-                </div>
-                <div class="d-flex align-items-center flex-column">
-                    <mat-icon>account_circle</mat-icon>
-                    <p>Contects</p>
-                </div>
-                <div class="d-flex align-items-center flex-column">
-                    <mat-icon>settings</mat-icon>
-                    <p>Settings</p>
-                </div>
-            </mat-toolbar>
-        </mat-card>
-    </mat-card-content>
+        <div class="d-flex align-items-center flex-column">
+          <mat-icon>phone_forwarded</mat-icon>
+          <p>Calls</p>
+        </div>
+        <div class="d-flex align-items-center flex-column">
+          <mat-icon>account_circle</mat-icon>
+          <p>Contects</p>
+        </div>
+        <div class="d-flex align-items-center flex-column">
+          <mat-icon>settings</mat-icon>
+          <p>Settings</p>
+        </div>
+      </mat-toolbar>
+    </mat-card>
+  </mat-card-content>
 </mat-card>
