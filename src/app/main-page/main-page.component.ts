@@ -105,6 +105,7 @@ export class MainPageComponent {
   }
   goToRoom(id: any, roomId?: any) {
     if (roomId) {
+      this.chatService.joinRoom(roomId); 
       this.router.navigate([`chat-room/${roomId}`])
     } else {
       const localUser = this.apiService.getLocalUser()

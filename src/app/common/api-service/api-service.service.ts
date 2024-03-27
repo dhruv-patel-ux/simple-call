@@ -44,7 +44,7 @@ export class ApiService {
   GetRoom(data: any){
     return this.http.post(`${this.base_url}/rooms`,data)
   }
-
+  
   GetAllRoom(userId: any){
     return this.http.get(`${this.base_url}/rooms?userId=${userId}`)
   }

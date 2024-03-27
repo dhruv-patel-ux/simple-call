@@ -70,7 +70,7 @@ export class ChatRoomComponent {
     });
   }
   ngOnDestroy(){
-    this.chatService.leaveRoom(this.RoomId)
+    this.chatService.leaveRoom(this.RoomId);
   }
   sendMessage() {
     this.chatService.sendMessage(this.inputValue,this.RoomId,this.apiService.getLocalUser()._id);
