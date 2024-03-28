@@ -4,10 +4,10 @@
       <mat-icon (click)="location.back()" class="me-1">keyboard_backspace</mat-icon>
       <div class="img-container me-1">
         <button class="profile-img" mat-icon-button aria-label="Example icon-button with a menu">
-          <img src="../../assets/avatars/dhruv_avatar.jpg" />
+          <img [src]="'http://localhost:9999/'+ toUser?.avatar" />
         </button>
       </div>
-      <h2>Simple Chat</h2>
+      <h2>{{toUser?.name}}</h2>
     </div>
     <div>
       <mat-icon class="me-1"> call</mat-icon>

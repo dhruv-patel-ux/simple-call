@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -8,7 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ApiService {
   base_url = "http://localhost:9999/api/v1";
-  profile_photo = new BehaviorSubject<any>('')
+  profile_photo = new BehaviorSubject<any>('');
+  friendList = signal<any>('')
   constructor(
     private http: HttpClient
   ) { }
@@ -36,20 +37,25 @@ export class ApiService {
   updateProfile(data: any) {
     return this.http.patch(`${this.base_url}/users/update-profile-photo`, data)
   }
-
+  findUserProfile(id:any){
+    return this.http.get(`${this.base_url}/users/find-user-profile/${id}`);
+  }
   GetAllUsers(SearchTerm?: any) {
     return this.http.get(`${this.base_url}/users?SearchTerm=${SearchTerm}`)
   }
-  
+
   GetRoom(data: any){
     return this.http.post(`${this.base_url}/rooms`,data)
   }
-  
+
   GetAllRoom(userId: any){
-    return this.http.get(`${this.base_url}/rooms?userId=${userId}`)
+    this.http.get(`${this.base_url}/rooms?userId=${userId}`).subscribe((res:any)=>{
+      this.friendList.set(res);
+      console.log(this.friendList());
+    })
   }
   getRoomMessageList(roomId: any){
     return this.http.get(`${this.base_url}/room-chat/${roomId}`)
   }
-  
+
 }

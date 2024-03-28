@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -24,89 +24,38 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrl: './main-page.component.scss'
 })
 export class MainPageComponent {
-  searchInput = new FormControl()
-
-  users: Array<any> = []
-  stories: Array<any> = [
-    // {
-    //   id: 1,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'my status'
-    // },
-    // {
-    //   id: 2,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // },
-    // {
-    //   id: 3,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // },
-    // {
-    //   id: 4,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // },
-    // {
-    //   id: 5,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // },
-    // {
-    //   id: 6,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // },
-    // {
-    //   id: 7,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // }
-    // , {
-    //   id: 8,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // },
-    // {
-    //   id: 9,
-    //   src: '../../assets/avatars/dhruv_avatar.jpg',
-    //   name: 'Dhruv'
-    // }
-  ];
+  searchInput = new FormControl();
+  apiService = inject(ApiService);
+  stories: Array<any> = [];
   message: string | undefined;
   messages: string[] = [];
+  // users: Array<any> = []
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
     private chatService: ChatService
   ) {
-    this.getLiveusers()
-
+    this.apiService.GetAllRoom(this.apiService.getLocalUser()._id);
   }
   profile_img: any;
   ngOnInit() {
     this.apiService.profile_photo.subscribe((value: any) => {
       this.profile_img = value;
     });
-    this.apiService.GetAllRoom(this.apiService.getLocalUser()._id).subscribe((res: any) => {
-      console.log(res);
-      this.users = res
-    })
-    this.profile_img = this.apiService.getLocalImage()
-    this.searchInput.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe((value: any) => {
-      this.GetAllUsers(value);
 
-    })
+    this.profile_img = this.apiService.getLocalImage()
+    // this.searchInput.valueChanges.pipe(
+    //   debounceTime(300),
+    //   distinctUntilChanged()
+    // ).subscribe((value: any) => {
+    //   this.GetAllUsers(value);
+
+    // })
   }
   goToRoom(id: any, roomId?: any) {
     if (roomId) {
-      this.chatService.joinRoom(roomId); 
-      this.router.navigate([`chat-room/${roomId}`])
+      this.chatService.joinRoom(roomId);
+      this.router.navigate([`chat-room/${roomId}`, { 'toUserId': id }])
     } else {
       const localUser = this.apiService.getLocalUser()
       this.apiService.GetRoom([id, localUser._id]).subscribe((res: any) => {
@@ -116,20 +65,11 @@ export class MainPageComponent {
       })
     }
   }
-  getLiveusers() {
-    this.chatService.getUsers().subscribe((user: any) => {
-      // this.users = user
-
-      // let loginUser = localStorage.getItem('USER')
-      // loginUser = loginUser && JSON.parse(loginUser);
-
-    })
-  }
-  GetAllUsers(value: any) {
-    this.apiService.GetAllUsers(value).subscribe((users: any) => {
-      this.users = users
-    })
-  }
+  // GetAllUsers(value: any) {
+  //   this.apiService.GetAllUsers(value).subscribe((users: any) => {
+  //     this.users = users
+  //   })
+  // }
   logout() {
     this.apiService.logout()
     this.router.navigate(['login'])

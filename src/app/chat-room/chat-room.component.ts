@@ -1,5 +1,5 @@
 import { Location, TitleCasePipe } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,28 +25,33 @@ import { ApiService } from '../common/api-service/api-service.service';
 export class ChatRoomComponent {
   RoomId:any;
   currentUser:any;
+  toUser:any;
+  toUserId:any;
   messages: Array<any> = [];
-
+  apiService = inject(ApiService);
   constructor(
     public location: Location,
     public dialog: MatDialog,
     private router: Router,
     private chatService: ChatService,
     private activateRoute: ActivatedRoute,
-    private apiService: ApiService
   ) {
     activateRoute.paramMap.subscribe((param: any)=>{
+      this.toUserId = param.params.toUserId;
       this.RoomId = param.params.id;
     })
     this.currentUser = this.apiService.getLocalUser();
-    apiService.getRoomMessageList(this.RoomId).subscribe((res:any)=>{
-      console.log(res);
+    this.apiService.getRoomMessageList(this.RoomId).subscribe((res:any)=>{
       this.messages =res
-      
+    });
+    this.apiService.findUserProfile(this.toUserId).subscribe((res:any)=>{
+      this.toUser =res.data;
+      console.log(this.toUser);
+
     })
    }
   inputValue: any = '';
-  
+
   openCamera() {
     // Check if getUserMedia is available
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -64,12 +69,12 @@ export class ChatRoomComponent {
 
   ngOnInit() {
     this.chatService.getMessages().subscribe((message: any) => {
-      this.messages.push(message) 
+      this.messages.push(message)
       console.log(message);
-           
     });
   }
   ngOnDestroy(){
+    this.apiService.GetAllRoom(this.apiService.getLocalUser()._id);
     this.chatService.leaveRoom(this.RoomId);
   }
   sendMessage() {
