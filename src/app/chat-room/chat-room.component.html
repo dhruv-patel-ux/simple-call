@@ -17,8 +17,8 @@
   <mat-card-content class="mt-2">
     <mat-list role="list" #chatContainer>
       @for(message of messages;track message?.message){
-      <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'">
-        <mat-chip-set aria-label="Dog selection">
+      <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'" #chatWindow>
+        <mat-chip-set aria-label="">
           <mat-chip>
             {{message?.message}}</mat-chip>
         </mat-chip-set>
@@ -35,10 +35,10 @@
     </div>
     @if(inputValue.length > 0){
     <div class="d-flex justify-content-center align-items-center">
-      <mat-chip-listbox aria-label="Fish selection">
-        <mat-chip-option (click)="sendMessage()"><mat-icon>send</mat-icon></mat-chip-option>
-      </mat-chip-listbox>
-
+      <button (click)="sendMessage()" mat-icon-button color="primary"
+        aria-label="Example icon button with a filter list icon">
+        <mat-icon>send</mat-icon>
+      </button>
     </div>
     }
     @if(inputValue.length < 1){ <div class="d-flex justify-content-center align-items-center">
