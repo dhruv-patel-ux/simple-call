@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { TitleCasePipe } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, provideRouter } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { ApiService } from '../common/api-service/api-service.service';
 import { ChatService } from '../common/service/chat-service.service';
@@ -21,7 +21,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule, RouterLink, MatMenuModule, ReactiveFormsModule],
   templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss'
+  styleUrl: './main-page.component.scss',
 })
 export class MainPageComponent {
   searchInput = new FormControl();

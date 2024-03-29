@@ -10,10 +10,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { VideoComponent } from '../video/video.component';
+import { VideoComponent } from '../../video/video.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatService } from '../common/service/chat-service.service';
-import { ApiService } from '../common/api-service/api-service.service';
+import { ChatService } from '../../common/service/chat-service.service';
+import { ApiService } from '../../common/api-service/api-service.service';
 
 @Component({
   selector: 'app-chat-room',

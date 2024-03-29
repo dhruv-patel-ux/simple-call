@@ -4,7 +4,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChatRoomComponent } from './main-page/chat-room/chat-room.component';
 
 
 @Component({

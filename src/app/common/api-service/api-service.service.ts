@@ -14,6 +14,9 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
+  validatToken(token:any){
+    return this.http.post(this.base_url+'/auth/validate-token',{token})
+  }
   getLocalUser(){
     const localUser = localStorage.getItem("USER");
     return localUser && JSON.parse(localUser);
