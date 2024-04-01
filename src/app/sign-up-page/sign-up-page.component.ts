@@ -33,7 +33,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class SignUpPageComponent implements OnInit {
 
   signUpForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
+    username: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]],
@@ -67,9 +67,9 @@ export class SignUpPageComponent implements OnInit {
       (res:any)=>{
       if(res.status){
         localStorage.setItem('ACCESS_TOKEN',res.accessToken)
-        localStorage.setItem('USER',res.data)
+        localStorage.setItem('USER',JSON.stringify(res.data))
         this.snackBarService.openSuccessSnackBar(res.message);
-        this.router.navigate(['main']);
+        this.router.navigate(['/main']);
       }else{
         this.snackBarService.openErrorSnackBar(res.message);
       }

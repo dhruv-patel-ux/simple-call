@@ -7,7 +7,7 @@
     <mat-card-content
         style="margin-top: 24px; height: 100%; display: flex; justify-content: center; align-items: center;">
         <div class="d-flex justify-content-center align-items-center">
-            <img src="../../../assets/avatars/pngwing.com.png" width="90%" height="400px" alt="">
+            <img [src]="apiService.profile_photo()" width="90%" height="400px" alt="">
         </div>
     </mat-card-content>
     

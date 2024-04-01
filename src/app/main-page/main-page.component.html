@@ -5,7 +5,7 @@
     <div class="img-container">
       <button class="profile-img" mat-icon-button [matMenuTriggerFor]="menu"
         aria-label="Example icon-button with a menu">
-        <img [src]="profile_img" height="48px" width="48px" />
+        <img [src]="apiService.profile_photo()" height="48px" width="48px" />
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>

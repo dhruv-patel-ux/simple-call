@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class ApiService {
   base_url = "http://localhost:9999/api/v1";
-  profile_photo = new BehaviorSubject<any>('');
+  profile_photo = signal<any>('');
   friendList = signal<any>('')
   constructor(
     private http: HttpClient

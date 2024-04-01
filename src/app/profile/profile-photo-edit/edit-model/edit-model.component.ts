@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ApiService } from '../../../common/api-service/api-service.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-model',
@@ -18,7 +19,9 @@ import { ApiService } from '../../../common/api-service/api-service.service';
 export class EditModelComponent {
   @ViewChild('fileInput') fileInput: any;
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private activModel: MatDialog,
+    private sanitizer: DomSanitizer
   ) { }
 
   openFilePicker() {
@@ -49,8 +52,11 @@ export class EditModelComponent {
     const formValue = new FormData();
     formValue.append('profile-photo', this.selectedFile);
     this.apiService.updateProfile(formValue).subscribe((res: any) => {
-      console.log(res);
-
+      console.log(res.url);
+      
+      localStorage.setItem('profile-image', `http://localhost:9999/public${res.url}`)
+      this.apiService.profile_photo.set(`http://localhost:9999/public${res.url}`)
+      this.activModel.closeAll();
     })
   }
   cancle() {

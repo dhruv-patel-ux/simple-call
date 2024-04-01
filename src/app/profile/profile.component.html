@@ -5,7 +5,7 @@
             <mat-card-title>
                 <div class="img-container">
                     <div class="profile-img" style="height: 142px !important; width: 142px !important;">
-                        <img src="../../assets/avatars/dhruv_avatar.jpg" height="128px" width="128px" />
+                        <img [src]="apiService.profile_photo()" height="128px" width="128px" />
                         <div class="edit-container">
                             <mat-icon matSuffix (click)="edit_profile('../../assets/avatars/dhruv_avatar.jpg')">mode_edit</mat-icon>
                         </div>

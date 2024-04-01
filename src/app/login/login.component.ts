@@ -20,7 +20,7 @@ import { SnackbarService } from '../common/models/snekbar.service';
 export class LoginComponent {
 
   loginForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.email]],
+    username: ['', [Validators.required]],
     password: ['', [Validators.required]]
   })
   constructor(
@@ -45,7 +45,7 @@ export class LoginComponent {
           localStorage.setItem('ACCESS_TOKEN', res.accessToken)
           localStorage.setItem('USER', JSON.stringify(res.data))
           localStorage.setItem('profile-image',res.data.avatar ? `http://localhost:9999/${res.data.avatar}` : 'src/assets/avatars/pngwing.com.png')
-          this.apiService.profile_photo.next(res.data.avatar ? `http://localhost:9999/${res.data.avatar}` : 'src/assets/avatars/pngwing.com.png')
+          this.apiService.profile_photo.set(res.data.avatar ? `http://localhost:9999/${res.data.avatar}` : 'src/assets/avatars/pngwing.com.png')
           this.snackBarService.openSuccessSnackBar(res.message);
           this.router.navigate(['main']);
         } else {

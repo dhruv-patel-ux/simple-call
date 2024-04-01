@@ -8,10 +8,10 @@
     <mat-card-content>
         <form class="example-form" [formGroup]="signUpForm">
             <mat-form-field class="example-full-width w-10">
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="name" placeholder="Enter Your Name">
-                @if (form['name'].hasError('required')) {
-                <mat-error>Name is <strong>required</strong></mat-error>
+                <mat-label>User Name</mat-label>
+                <input matInput formControlName="username" placeholder="Enter Your User Name">
+                @if (form['username'].hasError('required')) {
+                <mat-error>User Name is <strong>required</strong></mat-error>
                 }
             </mat-form-field>
             <mat-form-field class="example-full-width w-10">

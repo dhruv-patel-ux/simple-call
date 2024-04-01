@@ -37,13 +37,9 @@ export class MainPageComponent {
   ) {
     this.apiService.GetAllRoom(this.apiService.getLocalUser()._id);
   }
-  profile_img: any;
   ngOnInit() {
-    this.apiService.profile_photo.subscribe((value: any) => {
-      this.profile_img = value;
-    });
 
-    this.profile_img = this.apiService.getLocalImage()
+    this.apiService.profile_photo.set(this.apiService.getLocalImage()) 
     // this.searchInput.valueChanges.pipe(
     //   debounceTime(300),
     //   distinctUntilChanged()
