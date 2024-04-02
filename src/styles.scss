@@ -185,7 +185,10 @@ body {
 .me-1 {
   marker-end: 8px;
 }
-
+.active-teb{
+  background-color: rgb(36, 120, 109);
+  color: #fff;
+}
 .example-card {
   max-width: 550px;
   text-align: center;
@@ -306,16 +309,39 @@ body {
 }
 
 .main-card {
-  padding: 12px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
   max-width: 550px;
   text-align: center;
   margin: auto;
-  background: #111 !important;
+  // background: #111 !important;
+  & mat-card-header{
+    padding: 0px !important;
+    & mat-toolbar {
+      background: #111 !important;
+      padding: 44px 12px;
+      color: #fff;
+    }
+  }
+  & mat-card-footer{
+    background-color: #fff;
+    border-top: 1px solid rgb(36, 120, 109);
+    border-radius:14px;
 
+        & mat-toolbar {
+      color: rgb(36, 120, 109);
 
-  & mat-toolbar {
-    background: transparent !important;
-    color: #fff;
+      & div {
+        padding: 8px;
+        cursor: pointer;
+      }
+
+      & p {
+        margin: 0 !important;
+      }
+
+      // & mat-icon{
+      // }
+    }
   }
 
   & mat-card-content {
@@ -396,22 +422,6 @@ body {
             }
           }
         }
-      }
-
-      & mat-toolbar {
-        color: rgb(36, 120, 109);
-
-        & div {
-          padding: 8px;
-          cursor: pointer;
-        }
-
-        & p {
-          margin: 0 !important;
-        }
-
-        // & mat-icon{
-        // }
       }
     }
   }
@@ -521,26 +531,22 @@ video {
 //   bottom: 0;
 //   background: aliceblue;
 // }
-.search-box[type=text] {
-  width: 0px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: white;
-  background-image: url('./assets/logos/search.svg');
-  background-position: 10px 10px;
-  background-size: 24px 24px;
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
-  -webkit-transition: width 0.4s ease-in-out;
-  transition: width 0.4s ease-in-out;
+.search-box {
   position: relative;
-}
+  width: 100%;
 
-.search-box[type=text]:focus {
-  width: 75%;
-  position: absolute;
+  & mat-icon{
+    color: #777;
+    top: 28%;
+    left: 6%;
+    font-size: 32px;
+    position: absolute;
+  }
+  & input {
+    width: 80%;
+    padding: 18px 18px 18px 48px;
+    border-radius: 24px;
+}
 }
 
 .divider-white {

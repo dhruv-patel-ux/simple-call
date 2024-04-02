@@ -23,14 +23,20 @@ export const routes: Routes = [
   {
     path: 'main',
     canActivate: [authGuard],
+    loadComponent : () => import('./main-page/main-page.component').then(c => c.MainPageComponent),
     children: [
       {
         path: '',
-        loadComponent: () => import('./main-page/main-page.component').then(c => c.MainPageComponent)
+        pathMatch:'full',
+        redirectTo:'message-list'
       },
       {
         path: "message-list",
         loadComponent: () => import('../app/main-page/message-list/message-list.component').then(c => c.MessageListComponent)
+      },
+      {
+        path: "search",
+        loadComponent: () => import('../app/main-page/search-list/search-list.component').then(c => c.SearchListComponent)
       }
     ],
 
