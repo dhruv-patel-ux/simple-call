@@ -11,7 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet, provideRouter } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { ApiService } from '../common/api-service/api-service.service';
-import { ChatService } from '../common/service/chat-service.service';
+import { ChatService } from '../common/socket-service/chat-service.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 

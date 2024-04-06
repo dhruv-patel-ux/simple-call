@@ -68,6 +68,8 @@ export class SignUpPageComponent implements OnInit {
       if(res.status){
         localStorage.setItem('ACCESS_TOKEN',res.accessToken)
         localStorage.setItem('USER',JSON.stringify(res.data))
+        localStorage.setItem('profile-image',res.avatar);
+        this.apiService.profile_photo.set(res.avatar)
         this.snackBarService.openSuccessSnackBar(res.message);
         this.router.navigate(['/main']);
       }else{

@@ -12,7 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { ApiService } from '../../common/api-service/api-service.service';
-import { ChatService } from '../../common/service/chat-service.service';
+import { ChatService } from '../../common/socket-service/chat-service.service';
 
 @Component({
   selector: 'app-message-list',
@@ -27,9 +27,9 @@ export class MessageListComponent {
   constructor(
     private router: Router,
     private chatService: ChatService
-  )
-  {
-    this.apiService.GetAllRoom(this.apiService.getLocalUser()._id);
+  ) {
+    // this.apiService.GetAllRoom(this.apiService.getLocalUser()._id);
+    this.chatService.getFriends();
   }
   goToRoom(id: any, roomId?: any) {
     if (roomId) {
@@ -40,7 +40,7 @@ export class MessageListComponent {
       this.apiService.GetRoom([id, localUser._id]).subscribe((res: any) => {
         const roomId = res.data.roomId;
         this.chatService.joinRoom(roomId);
-        this.router.navigate([`chat-room/${roomId}`])
+        this.router.navigate([`chat-room/${roomId}`, { 'toUserId': id }])
       })
     }
   }

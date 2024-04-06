@@ -54,7 +54,6 @@ export class ApiService {
   GetAllRoom(userId: any){
     this.http.get(`${this.base_url}/rooms?userId=${userId}`).subscribe((res:any)=>{
       this.friendList.set(res);
-      console.log(this.friendList());
     })
   }
   getRoomMessageList(roomId: any){

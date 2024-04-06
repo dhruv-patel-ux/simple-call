@@ -7,7 +7,7 @@
           <img [src]="'http://localhost:9999/'+ toUser?.avatar" />
         </button>
       </div>
-      <h2>{{toUser?.name}}</h2>
+      <h2>{{toUser?.username}}</h2>
     </div>
     <div>
       <mat-icon class="me-1"> call</mat-icon>
@@ -18,10 +18,10 @@
     <mat-list role="list" #chatContainer>
       @for(message of messages;track message?.message){
       <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'" #chatWindow>
-        <mat-chip-set aria-label="">
-          <mat-chip>
-            {{message?.message}}</mat-chip>
-        </mat-chip-set>
+        <p>
+          {{message?.message}}
+        </p>
+
       </mat-list-item>
       }
     </mat-list>
