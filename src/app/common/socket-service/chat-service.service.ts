@@ -31,8 +31,8 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(message: any, roomId: any, userId: any) {
-    this.socket.emit('message', { message, roomId, userId });
+  sendMessage(message: any, roomId: any, userId: any, toUserId: any) {
+    this.socket.emit('message', { message, roomId, userId, toUserId });
   }
 
   getMessages() {
