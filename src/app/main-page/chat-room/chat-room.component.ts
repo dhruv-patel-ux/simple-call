@@ -1,5 +1,5 @@
 import { Location, TitleCasePipe } from '@angular/common';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -50,7 +50,7 @@ export class ChatRoomComponent {
     })
   }
   inputValue: any = '';
-
+  @ViewChild('chatContainer') scroolCon: any;
   openCamera() {
     // Check if getUserMedia is available
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -65,7 +65,11 @@ export class ChatRoomComponent {
       console.error('getUserMedia is not supported');
     }
   }
-
+  @ViewChild('list') list: any
+  ngAfterViewInit() {
+    console.log(this.scroolCon.nativeElement,this.list);
+    this.scroolCon.nativeElement.scrollTop = this.scroolCon.nativeElement.scrollHeight;
+  }
   ngOnInit() {
     this.chatService.getMessages().subscribe((message: any) => {
       this.messages.push(message)

@@ -18,10 +18,12 @@
           </div>
         </div>
         <div class="mess-number">
-          <p>2 min ago</p>
+          <p>{{user?.updatedAt | date:'hh:mm:ss'}}</p>
+          @if(getCount(user)){
           <button mat-mini-fab color="warn" aria-label="Example icon button with a home icon">
-            3
+            {{getCount(user)}}
           </button>
+          }
         </div>
       </div>
     </mat-list-item>

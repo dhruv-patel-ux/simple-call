@@ -322,6 +322,10 @@ body {
   text-align: center;
   margin: auto;
 
+  .mat-mdc-card {
+    box-shadow: none !important;
+  }
+
   // background: #111 !important;
   & mat-card-header {
     padding: 0px !important;
@@ -335,11 +339,20 @@ body {
 
   & mat-card-footer {
     background-color: #fff;
-    border-top: 1px solid rgb(36, 120, 109);
-    border-radius: 14px;
+    // border-top: 1px solid rgb(36, 120, 109);
+    // border-radius: 14px;
 
     & mat-toolbar {
       color: rgb(36, 120, 109);
+
+      & :first-child {
+        border-radius: 14px 0px 0px 14px;
+      }
+
+      & :last-child {
+        border-radius: 0px 14px 14px 0px;
+      }
+
 
       & div {
         padding: 8px;
@@ -478,7 +491,6 @@ video {
   & mat-card-content {
     height: calc(100% - 88px);
     overflow: auto;
-
     & mat-list {
       & mat-list-item {
         padding: 0 !important;
@@ -488,6 +500,7 @@ video {
 
     & .start {
       margin-right: 16px;
+
       .mdc-list-item__content {
         display: flex;
         height: auto;
@@ -506,6 +519,7 @@ video {
 
     & .end {
       margin-left: 16px;
+
       .mdc-list-item__content {
         display: flex;
         height: auto;

@@ -14,10 +14,10 @@
       <mat-icon>videocam</mat-icon>
     </div>
   </mat-toolbar>
-  <mat-card-content class="mt-2">
-    <mat-list role="list" #chatContainer>
+  <mat-card-content class="mt-2" #chatContainer>
+    <mat-list role="list" #list>
       @for(message of messages;track message?.message){
-      <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'" #chatWindow>
+      <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'">
         <p>
           {{message?.message}}
         </p>

@@ -1,4 +1,4 @@
-import { TitleCasePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,7 +17,7 @@ import { ChatService } from '../../common/socket-service/chat-service.service';
 @Component({
   selector: 'app-message-list',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule, RouterLink, MatMenuModule, ReactiveFormsModule, RouterOutlet],
+  imports: [MatCardModule, MatButtonModule, MatInputModule, MatIconModule, AvatarModule, MatToolbarModule, TitleCasePipe, MatDividerModule, MatListModule, RouterLink, MatMenuModule, ReactiveFormsModule, RouterOutlet, DatePipe],
   templateUrl: './message-list.component.html',
   styleUrl: './message-list.component.scss'
 })
@@ -43,5 +43,9 @@ export class MessageListComponent {
         this.router.navigate([`chat-room/${roomId}`, { 'toUserId': id }])
       })
     }
+  }
+  getCount(arr: any) {
+    const count = arr.unreadCount?.find((id: any) => id.id == this.apiService.getLocalUser()._id);
+    return count?.count
   }
 }
