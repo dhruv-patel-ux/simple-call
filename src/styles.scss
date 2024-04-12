@@ -343,6 +343,7 @@ body {
     // border-radius: 14px;
 
     & mat-toolbar {
+      padding: 0px !important;
       color: rgb(36, 120, 109);
 
       & :first-child {
@@ -491,6 +492,7 @@ video {
   & mat-card-content {
     height: calc(100% - 88px);
     overflow: auto;
+
     & mat-list {
       & mat-list-item {
         padding: 0 !important;
