@@ -67,8 +67,9 @@ export class ChatRoomComponent {
   }
   @ViewChild('list') list: any
   ngAfterViewInit() {
-    console.log(this.scroolCon.nativeElement,this.list);
-    this.scroolCon.nativeElement.scrollTop = this.scroolCon.nativeElement.scrollHeight;
+    setTimeout(() => {
+      this.ScrollToLastMessage();
+    }, 400);
   }
   ngOnInit() {
     this.chatService.getMessages().subscribe((message: any) => {
@@ -82,5 +83,12 @@ export class ChatRoomComponent {
   sendMessage() {
     this.chatService.sendMessage(this.inputValue, this.RoomId, this.apiService.getLocalUser()._id, this.toUserId);
     this.inputValue = '';
+    setTimeout(() => {
+      this.ScrollToLastMessage();
+    }, 400);
+  }
+  ScrollToLastMessage() {
+    const lastItem = document.getElementById(this.messages[this.messages.length - 1]._id);
+    lastItem?.scrollIntoView()
   }
 }

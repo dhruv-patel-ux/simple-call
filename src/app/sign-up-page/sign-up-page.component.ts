@@ -13,7 +13,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { ApiService } from '../common/api-service/api-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SnackbarService } from '../common/models/snekbar.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,7 +26,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-sign-up-page',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatIconModule, RouterLink],
   templateUrl: './sign-up-page.component.html',
   styleUrl: './sign-up-page.component.scss'
 })
@@ -43,7 +43,7 @@ export class SignUpPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public location: Location,
-    private snackBarService: SnackbarService, 
+    private snackBarService: SnackbarService,
     private apiService: ApiService,
     private router: Router
   ) { }
@@ -64,20 +64,20 @@ export class SignUpPageComponent implements OnInit {
       return
     }
     this.apiService.signup(this.signUpForm.value).subscribe(
-      (res:any)=>{
-      if(res.status){
-        localStorage.setItem('ACCESS_TOKEN',res.accessToken)
-        localStorage.setItem('USER',JSON.stringify(res.data))
-        localStorage.setItem('profile-image',res.avatar);
-        this.apiService.profile_photo.set(res.avatar)
-        this.snackBarService.openSuccessSnackBar(res.message);
-        this.router.navigate(['/main']);
-      }else{
-        this.snackBarService.openErrorSnackBar(res.message);
-      }
-    },(error: any) =>{
-      this.snackBarService.openErrorSnackBar(error.message);
-    });
+      (res: any) => {
+        if (res.status) {
+          localStorage.setItem('ACCESS_TOKEN', res.accessToken)
+          localStorage.setItem('USER', JSON.stringify(res.data))
+          localStorage.setItem('profile-image', res.avatar);
+          this.apiService.profile_photo.set(res.avatar)
+          this.snackBarService.openSuccessSnackBar(res.message);
+          this.router.navigate(['/main']);
+        } else {
+          this.snackBarService.openErrorSnackBar(res.message);
+        }
+      }, (error: any) => {
+        this.snackBarService.openErrorSnackBar(error.message);
+      });
   }
 
   passwordMatchValidator(g: FormGroup) {

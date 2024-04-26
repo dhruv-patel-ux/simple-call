@@ -22,7 +22,6 @@ export class ProfileComponent {
     private router: Router
   ) { }
   edit_profile(src: any) {
-    console.log(src);
     this.router.navigate(['profile/1'])
   }
   ngOnInit() {

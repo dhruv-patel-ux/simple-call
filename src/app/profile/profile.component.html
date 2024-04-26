@@ -7,7 +7,7 @@
                     <div class="profile-img" style="height: 142px !important; width: 142px !important;">
                         <img [src]="apiService.profile_photo()" height="128px" width="128px" />
                         <div class="edit-container">
-                            <mat-icon matSuffix (click)="edit_profile('../../assets/avatars/dhruv_avatar.jpg')">mode_edit</mat-icon>
+                            <mat-icon matSuffix (click)="edit_profile(apiService.profile_photo())">mode_edit</mat-icon>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../common/api-service/api-service.service';
 import { SnackbarService } from '../common/models/snekbar.service';
 
@@ -13,7 +13,7 @@ import { SnackbarService } from '../common/models/snekbar.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, MatInputModule, ReactiveFormsModule, MatIconModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
