@@ -15,7 +15,7 @@
     </div>
   </mat-toolbar>
   <mat-card-content class="mt-2" #chatContainer style="padding: 0 !important;">
-    <mat-list role="list" #list style="height: auto;
+    <mat-list role="list" id='list' style="height: auto;
     overflow: scroll;">
       @for(message of messages;track message?._id){
       <mat-list-item role="listitem" [class]="message?.userId == currentUser._id ? 'end' : 'start'" [id]="message._id">
@@ -27,6 +27,11 @@
       }
     </mat-list>
   </mat-card-content>
+  @if(showBottomScrollIcon){
+  <div class="bottom-scroll-icon" (click)="ScrollToLastMessage() ">
+    <mat-icon>arrow_downward</mat-icon>
+  </div>
+  }
   <mat-toolbar class="footer d-flex align-items-center justify-content-between">
     <mat-icon> insert_link</mat-icon>
     <div class="input-box">

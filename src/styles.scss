@@ -536,6 +536,19 @@ video {
         border-radius: 10px;
       }
     }
+
+  }
+
+  .bottom-scroll-icon {
+    position: absolute;
+    bottom: 10%;
+    background-color: rgba(32, 160, 145, 0.801);
+    color: #fff;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
   }
 
   .footer {

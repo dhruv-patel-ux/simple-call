@@ -41,7 +41,8 @@ export class ChatRoomComponent {
       this.RoomId = param.params.id;
       this.currentUser = this.apiService.getLocalUser();
       this.apiService.getRoomMessageList(this.RoomId).subscribe((res: any) => {
-        this.messages = res
+        this.messages = res;
+        this.ScrollToLastMessage()
       });
       this.apiService.findUserProfile(this.toUserId).subscribe((res: any) => {
         this.toUser = res.data;
@@ -50,7 +51,7 @@ export class ChatRoomComponent {
     })
   }
   inputValue: any = '';
-  @ViewChild('chatContainer') scroolCon: any;
+  @ViewChild('chatContainer') chatContainer: any;
   openCamera() {
     // Check if getUserMedia is available
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -65,16 +66,23 @@ export class ChatRoomComponent {
       console.error('getUserMedia is not supported');
     }
   }
+  LastItemDistance: any = 0;
+  showBottomScrollIcon: boolean = false;
   @ViewChild('list') list: any
   ngAfterViewInit() {
     setTimeout(() => {
       this.ScrollToLastMessage();
+      this.chatContainer.nativeElement.addEventListener('scroll', this.handleScroll.bind(this));
     }, 400);
   }
   ngOnInit() {
     this.chatService.getMessages().subscribe((message: any) => {
-      this.messages.push(message)
-      console.log(message);
+      this.messages.push(message);
+      setTimeout(() => {
+        if (this.LastItemDistance < 0) {
+          this.ScrollToLastMessage();
+        }
+      }, 10);
     });
   }
   ngOnDestroy() {
@@ -83,12 +91,26 @@ export class ChatRoomComponent {
   sendMessage() {
     this.chatService.sendMessage(this.inputValue, this.RoomId, this.apiService.getLocalUser()._id, this.toUserId);
     this.inputValue = '';
-    setTimeout(() => {
-      this.ScrollToLastMessage();
-    }, 400);
   }
   ScrollToLastMessage() {
     const lastItem = document.getElementById(this.messages[this.messages.length - 1]._id);
-    lastItem?.scrollIntoView()
+    lastItem?.scrollIntoView({ behavior: 'instant' })
+  }
+  handleScroll(event: any) {
+    const chatContainer = event.target;
+    const scrollHeight = chatContainer.scrollHeight;
+    const scrollTop = chatContainer.scrollTop;
+    const clientHeight = chatContainer.clientHeight;
+
+    const listItems = chatContainer.querySelectorAll('mat-list-item');
+
+    const lastItemPosition = scrollHeight - listItems[listItems.length - 1].clientHeight;
+
+    this.LastItemDistance = scrollHeight - (scrollTop + clientHeight) - listItems[listItems.length - 1].clientHeight;
+    if (this.LastItemDistance > 0) {
+      this.showBottomScrollIcon = true
+    } else {
+      this.showBottomScrollIcon = false
+    }
   }
 }

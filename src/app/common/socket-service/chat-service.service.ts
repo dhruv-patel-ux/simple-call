@@ -12,13 +12,7 @@ export class ChatService {
 
   constructor() {
     let token = localStorage.getItem('ACCESS_TOKEN');
-    this.socket = io(`http://localhost:9999?authorization=${token}`,
-      {
-        transports: ['websocket'],
-        extraHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+    this.socket = io(`http://localhost:9999?userId=${this.apiService.getLocalUser()._id}`);
   }
 
   getUsers() {
